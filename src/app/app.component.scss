@@ -1,0 +1,68 @@
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+mat-toolbar{
+    background-color:rgb(241, 241, 238);
+    color:black;
+}
+mat-drawer-container{
+    height: calc(100vh - 65px);
+}
+mat-drawer{
+    margin: 16px;
+    width: 200px;
+    border-right: none;
+    background:rgb(241, 241, 238);
+    color:black;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+.Consejo_Estado{
+    margin-top: 16px;
+    width: 150px;
+    height: 50px;
+}
+.name{
+    margin-top: 8px;
+    font-weight:normal;
+}
+.desingnation{
+    margin-top: 2px;
+    font-size:0.7rem;
+    color: black;
+}
+.Menu_button{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1rem;
+    mat-icon,span, a {
+        margin-right: 8px;
+        color: rgb(219, 128, 128);
+    }
+
+}
+.content{
+    height: calc(100vh - 98px);
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 32px;
+    display: flex;
+    font-size: 2rem;
+    color: rgb(219, 128, 128);
+}
+mat-divider {
+
+    margin-top: 16px;
+    margin-bottom: 16px;
+    color: white;
+
+}
+mat-drawer-content{
+
+    height: calc(100vh - 65px);
+
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {asuntos} from '../../modelos/asuntos.intarface'
 import { Responsablesinterface } from '../../modelos/Responsables.interface';
 import {EstadosInterface} from '../../modelos/Estados.interface';
-import {registro} from '../../modelos/Registro';
+import {registro} from '../../modelos/Registro'
 import {Mediointerface} from '../../modelos/Medio.interface';
 import { HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
@@ -10,8 +10,6 @@ import { FormControl, FormControlName, FormGroup, Validators } from '@angular/fo
 import {registrodetalle} from '../../modelos/registrodetalle'
 import { registroA } from 'src/app/modelos/RegistroA';
 import { SeguimientoM } from 'src/app/modelos/SeguimientoM';
-//import { ConsoleReporter } from 'jasmine';
-
 
 
 
@@ -26,7 +24,6 @@ export class ApiService {
 
 
   url:string = "https://192.168.209.253:446/"
-  // url:string = "https://localhost:7202/"
   private httpHeaders =new HttpHeaders ({'content-Type': 'appplication/json'});
   
   
@@ -83,37 +80,15 @@ export class ApiService {
     }
 
     getSeguimiento(page:number):Observable<SeguimientoM[]>{
-      
       let direccion = this.url + "api/seguimiento/" +  page;
-      // console.log(direccion)
       return this.http.get<SeguimientoM[]>(direccion)
-      // console.log(this.getSeguimiento)
+      console.log(this.getSeguimiento)
     }
-    GuardarEstado(RegistroId: any, EstadoId: any): Observable<any> {
 
-      
-      // console.log(RegistroId)
-      // console.log(EstadoId)
-      // console.log(this.http.put(this.url+ "api/Registro/" + registroId, registro))
-      return this.http.put(this.url+ "api/Registro/"+  RegistroId +'?EstadoId',  EstadoId);
-      // return this.http.put(this.myAppUrl + this.myApiUrl + RegistroId, EstadoId);
-
-//console.log(this.myAppUrl + this.myApiUrl2 + "1" + "/reporte"  );
-    //const headers = new HttpHeaders().set('Content-Type', 'application/json');
-  //  return this.http.get<Blob>(this.myAppUrl + this.myApiUrl2 + id + "/reporte", { responseType: 'blob' as 'json' });
-    //return this.http.get<Blob>('https://localhost:7269/api/InspeccionDetalle/1/reporte', { responseType: 'blob' as 'json' });
-  
-
-    }
-    // getData(): Observable<any[]> {
-    //   return this.http.get<any[]>(this.url);
-    // }
     // SaveRegistro(registro: any){
 
     //   return this.http.post(this.url + "registro", registro)
 
     // }
-
-    
     
 }

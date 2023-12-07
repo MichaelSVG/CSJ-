@@ -4,10 +4,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardModule } from './Dashboard/dashboard.module';
-import { VistasModule } from './Vistas/vistas.module';
-import { LoginModule } from './Login/login.module';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { PagesModule } from './pages/pages.module';
+import { UsuarioModule } from './Usuario/usuario.module';
+import { AuthModule } from './auth/auth.module';
+import {MatTableModule} from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
+
+
+import {ReactiveFormsModule, FormsModule , FormGroup} from '@angular/forms';
 
 
 
@@ -15,21 +19,25 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
 ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NgbModule,
     AppRoutingModule,
-    DashboardModule,
-    VistasModule,
-    LoginModule,
-    MatFormFieldModule
+    PagesModule,
+    UsuarioModule,
+    AuthModule,
+    MatTableModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+    
 
 
   ],
   providers: [AppRoutingModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }

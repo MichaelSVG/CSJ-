@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
+import { PagesComponent } from './pages.component';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -9,10 +9,13 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    PagesComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatSidenavModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule
   ]
 })
-export class DashboardModule { }
+export class PagesModule { }

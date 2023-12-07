@@ -82,9 +82,11 @@ export class ApiService {
     getSeguimiento(page:number):Observable<SeguimientoM[]>{
       let direccion = this.url + "api/seguimiento/" +  page;
       return this.http.get<SeguimientoM[]>(direccion)
-      console.log(this.getSeguimiento)
-    }
 
+    }
+    GuardarEstado(RegistroId: any, EstadoId: any): Observable<any> {
+      return this.http.put(this.url+ "api/Registro/" + RegistroId + '?EstadoId=', EstadoId);
+    }
     // SaveRegistro(registro: any){
 
     //   return this.http.post(this.url + "registro", registro)

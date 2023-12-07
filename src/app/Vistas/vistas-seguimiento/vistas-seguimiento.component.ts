@@ -13,8 +13,6 @@ import { MatSelectChange } from '@angular/material/select';
 export class VistasSeguimientoComponent {
 
 
-
-
   datosR: any[]=[]; datos: any[]=[]; Estados: any[]=[];
 
   form: FormGroup;
@@ -120,22 +118,44 @@ export class VistasSeguimientoComponent {
     fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());
     return fecha;
   }
-  GuardarEstado(){
+  // GuardarEstado(){
 
 
 
 
-      const EstadoI: any = {
-        RegistroId: 1,
-        EstadoId: 1,
+  //     const EstadoI: any = {
+  //       RegistroId: 1,
+  //       EstadoId: 1,
         
-      }
-      console.log(EstadoI)
+  //     }
+  //     console.log(EstadoI)
 
-   this.api.GuardarEstado(1,1).subscribe() 
+  //  this.api.GuardarEstado(this.RegId,EstadoI).subscribe() 
  
-    }
-
+  //   }
+  GuardarEstado(){
+      const EstadoI: any = {
+        EstadoId:9,
+      }
+      // console.log("entro")
+      // console.log(EstadoI.estadoId);
+      //this.Estados= I.target.value;
+      console.log(EstadoI.EstadoId)
+      this.api.GuardarEstado( this.RegId,9).subscribe(data => {
+        console.log(this.RegId,EstadoI.estadoId)
+        this.form = data
+        // console.log(this.datosR)
+        // console.log('Respuesta del servidor:', this.datosR);
+          //Puedes realizar otras acciones después de recibir la respuesta
+        
+        },
+        error => {
+          //console.error('Error al enviar la solicitud:', error);
+          //Puedes manejar el error aquí
+        }
+      )
+  // console.log(this.datosR)
+     }
   
 // console.log(this.datosR)
    

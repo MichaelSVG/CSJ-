@@ -1,0 +1,101 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <h1 class="text-center text-secondary">Registro</h1>
+
+    <div class="container ">
+        <form [formGroup]="form" action="#" class="contenedor credit-card-div" (ngSubmit)="GuardarRegistro()">
+            <div class="panel panel-default">
+                <div class="panel-heading ">
+                    <div class="row ">
+                        <br />
+                        <div class="col-md-12 pad-adjust">
+                            <label for="exampleFormControlTextarea1" class="form-label">Remitente</label>
+                            <select formControlName="Remitente" class="form-select" aria-label="Default select example"
+                                required>
+                                <option value="{{Michael.id}}" *ngFor="let Michael of datosR" required>
+                                    {{Michael.responsable1}}</option>
+                            </select>
+                        </div>
+                        <br />
+                        <div class="col-md-12 pad-adjust">
+                            <label for="exampleFormControlTextarea1" class="form-label">Cuidad</label>
+                            <select formControlName="Ciudad" class="form-select" aria-label="Default select example"
+                                required>
+                                <option value="{{Michael.id}}" *ngFor="let Michael of datosR" required>
+                                    {{Michael.responsable1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <label for="exampleFormControlTextarea1" class="form-label">Asunto</label>
+                            <select formControlName="Asunto" class="form-select" aria-label="Default select example"
+                                required>
+                                <option value="{{Michael.id}}" *ngFor="let Michael of datos" required>
+                                    {{Michael.asunto1}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <br />
+                            <label for="exampleFormControlTextarea1" class="form-label">Medio</label>
+                            <select formControlName="Medio" class="form-select" aria-label="Default select example"
+                                required>
+                                <option value="{{Michael.id}}" *ngFor="let Michael of datosM" required>
+                                    {{Michael.medio1}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <br />
+                        <div class="col-md-12 pad-adjust">
+                            <label for="exampleFormControlTextarea1" class="form-label">Registro</label>
+                            <textarea formControlName="Registro" class="form-control" id="exampleFormControlTextarea1"
+                                rows="3" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <br />
+                        <div class="col-md-12 pad-adjust">
+                            <label class="form-label">Fecha Vencimiento</label>
+                            <input formControlName="Fecha" type="date" class="form-control" id="fecha"
+                                placeholder="Fecha Limite" required>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row ">
+                        <br />
+
+                            <mat-form-field>
+                                <mat-label class="form-label">Responsables</mat-label><br/>
+                                <mat-select (selectionChange)="RecorrerCheck($event)" formControlName="responsables" class="form-select" multiple aria-label="Multiple select example" required>
+                                    <mat-option  value="{{Michael.id}}" *ngFor="let Michael of datosR" required>{{Michael.responsable1}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                    <br />
+                    <div class="row ">
+                        <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                            <button type="submit" class="btn btn-success col-md-6 col-sm-6 col-xs-6 pad-adjust"
+                                value="Guardar">Guardar</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>

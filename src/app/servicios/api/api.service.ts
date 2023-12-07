@@ -1,0 +1,119 @@
+import { Injectable } from '@angular/core';
+import {asuntos} from '../../modelos/asuntos.intarface'
+import { Responsablesinterface } from '../../modelos/Responsables.interface';
+import {EstadosInterface} from '../../modelos/Estados.interface';
+import {registro} from '../../modelos/Registro';
+import {Mediointerface} from '../../modelos/Medio.interface';
+import { HttpClient, HttpHeaders} from '@angular/common/http'
+import { Observable } from 'rxjs';
+import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import {registrodetalle} from '../../modelos/registrodetalle'
+import { registroA } from 'src/app/modelos/RegistroA';
+import { SeguimientoM } from 'src/app/modelos/SeguimientoM';
+//import { ConsoleReporter } from 'jasmine';
+
+
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+
+ 
+  datos: any[]=[]; datosR:any[]=[]; datosM:any[]=[]; datosE:any[]=[]; registroD:any[]=[];
+
+
+
+  url:string = "https://192.168.209.253:446/"
+  // url:string = "https://localhost:7202/"
+  private httpHeaders =new HttpHeaders ({'content-Type': 'appplication/json'});
+  
+  
+  Formulario = new FormGroup({
+    asunto: new FormControl('',Validators.required)
+  })
+
+
+  constructor( private http:HttpClient) { }
+
+    getasuntos(page:string):Observable<asuntos[]>{
+      let direccion = this.url + "api/" + page;
+      return this.http.get<asuntos[]>(direccion)
+      
+    }
+    getremitente(page:string):Observable<Responsablesinterface[]>{
+      let direccion = this.url + "api/" + page;
+
+      return this.http.get<Responsablesinterface[]>(direccion)
+      
+    }
+    getMedio(page:string):Observable<Mediointerface[]>{
+      let direccion = this.url + "api/" + page;
+      return this.http.get<Mediointerface[]>(direccion)
+      
+    }
+
+    getEstados(page:string):Observable<EstadosInterface[]>{
+      let direccion = this.url + "api/" + page;
+      return this.http.get<EstadosInterface[]>(direccion)
+      
+    }
+    GuardarRegistro(registro: any): Observable<any> {
+      return this.http.post(`${this.url}api/registro`, registro);
+    }
+
+    getRegistroDetalle(page:string):Observable<registrodetalle[]>{
+      let direccion = this.url + "api/RegistroDetalle" + page;
+      return this.http.get<registrodetalle[]>(direccion)
+      
+    }
+    GuardarRegistroDetalle(registrodetalle: any): Observable<any> {
+      return this.http.post(`${this.url}api/RegistroDetalle`, registrodetalle);
+    }
+
+  
+    getregistroA(page:string):Observable<registroA[]>{
+      let direccion = this.url + "api/" + page;
+      return this.http.get<registroA[]>(direccion)
+      
+    }
+    GuardarSeguimiento(registro: any): Observable<any> {
+      return this.http.post(`${this.url}api/seguimiento`, registro);
+    }
+
+    getSeguimiento(page:number):Observable<SeguimientoM[]>{
+      
+      let direccion = this.url + "api/seguimiento/" +  page;
+      // console.log(direccion)
+      return this.http.get<SeguimientoM[]>(direccion)
+      // console.log(this.getSeguimiento)
+    }
+    GuardarEstado(RegistroId: any, EstadoId: any): Observable<any> {
+
+      
+      // console.log(RegistroId)
+      // console.log(EstadoId)
+      // console.log(this.http.put(this.url+ "api/Registro/" + registroId, registro))
+      return this.http.put(this.url+ "api/Registro/"+  RegistroId +'?EstadoId',  EstadoId);
+      // return this.http.put(this.myAppUrl + this.myApiUrl + RegistroId, EstadoId);
+
+//console.log(this.myAppUrl + this.myApiUrl2 + "1" + "/reporte"  );
+    //const headers = new HttpHeaders().set('Content-Type', 'application/json');
+  //  return this.http.get<Blob>(this.myAppUrl + this.myApiUrl2 + id + "/reporte", { responseType: 'blob' as 'json' });
+    //return this.http.get<Blob>('https://localhost:7269/api/InspeccionDetalle/1/reporte', { responseType: 'blob' as 'json' });
+  
+
+    }
+    // getData(): Observable<any[]> {
+    //   return this.http.get<any[]>(this.url);
+    // }
+    // SaveRegistro(registro: any){
+
+    //   return this.http.post(this.url + "registro", registro)
+
+    // }
+
+    
+    
+}

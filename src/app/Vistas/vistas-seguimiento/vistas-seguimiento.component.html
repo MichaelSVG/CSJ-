@@ -1,0 +1,86 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <h1 class="text-center text-secondary">Seguimiento</h1>
+
+    <div class="container ">
+
+        <form [formGroup]="form" action="#" class="contenedor credit-card-div" (ngSubmit)="GuardarRegistro()">
+            <div class="panel panel-default">
+                <div class="panel-heading ">
+                    <br>
+                    <div class="row ">
+                        <br>
+                        <div class="col-md-12 pad-adjust">
+                            <label for="exampleFormControlTextarea1" class="form-label">Registro <br> <input formControlName="Registro" list="browsers"
+                                    name="myBrowser" (change)="onMedio($event)" /></label>
+                            <datalist id="browsers" >
+                                <select id="browsers"  class="form-select"
+                                aria-label="Default select example" (change)="onMedio($event)">
+                                    <option value="{{Michael.id}}" *ngFor="let Michael of datosR">{{Michael.id+Michael.nota}}</option>
+                                </select>
+                            </datalist>
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-12 pad-adjust">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Observacion</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let Lista of datos ">
+                                            <td>{{Lista.id}}</td>
+                                            <td>{{Lista.seguimiento1}}</td>
+                                            <td>{{Lista.fecha | date:'yyyy-MM-dd HH:mm'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <br />
+                            <div class="col-md-12 pad-adjust">
+                                <label for="exampleFormControlTextarea1" class="form-label">Comentario</label>
+                                <textarea formControlName="Comentario" class="form-control"
+                                    id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pad-adjust">
+                            <label for="exampleFormControlTextarea1" class="form-label">Estado</label>
+                            <select [(ngModel)]="valorSeleccionado" (change)="onSelectionChange()"  formControlName="Estado" class="form-select" aria-label="Default select example">
+                                <option value="{{Michael.id}}" *ngFor="let Michael of Estados">{{Michael.estado1}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                        <button  type="submit" class="btn btn-success col-md-6 col-sm-6 col-xs-6 pad-adjust" value="Guardar" >Guardar</button>
+                        <!-- [disabled]="this.form.invalid" -->
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</body>

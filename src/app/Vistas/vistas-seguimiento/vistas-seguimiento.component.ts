@@ -1,0 +1,148 @@
+
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators, FormsModule, FormBuilder } from '@angular/forms';
+import {ApiService} from '../../servicios/api/api.service'
+import { ToastrService } from 'ngx-toastr';
+import { MatSelectChange } from '@angular/material/select';
+
+@Component({
+  selector: 'app-vistas-seguimiento',
+  templateUrl: './vistas-seguimiento.component.html',
+  styleUrls: ['./vistas-seguimiento.component.scss']
+})
+export class VistasSeguimientoComponent {
+
+
+
+
+  datosR: any[]=[]; datos: any[]=[]; Estados: any[]=[];
+
+  form: FormGroup;
+
+  id: string | undefined;
+
+  RegId: any;
+
+  valorSeleccionado!: string;
+
+
+
+  Formulario = new FormGroup({
+    Asunto : new FormControl('',Validators.required)
+  })
+
+  constructor(private api:ApiService, private fb: FormBuilder, private toastr: ToastrService) {
+    this.form =this.fb.group({
+      
+      
+      Registro:['',Validators.required],
+      Comentario:['',Validators.required],
+      Estado:['',Validators.required],
+      
+      
+    })
+  }
+  /*ngOnInit almacena los get de los datos para mostrar*/
+  ngOnInit(): void {
+    this.api.getregistroA("Registro").subscribe((data) => {
+     this.datosR = data;
+    //  console.log(this.datosR)
+    })
+    this.api.getregistroA("Estados").subscribe((data2) => {
+      this.Estados = data2;
+      //console.log(this.datosR)
+     })
+   }
+   FiltarSeguimiento(e: any){
+    this.RegId= e.target.value;
+    // console.log(this.RegId)
+   }
+   onMedio(e: any) {
+    // console.log(e.target.value);
+    this.RegId = e.target.value;
+
+    this.api.getSeguimiento(this.RegId).subscribe((data) => {
+      this.datos = data
+      // console.log(data);
+      //   console.log('Respuesta del servidor:', this.RegId);
+      // Puedes realizar otras acciones después de recibir la respuesta
+      },
+      error => {
+        // console.error('Error al enviar la solicitud:', error);
+        // Puedes manejar el error aquí
+      }
+    )
+    
+  }
+   GuardarRegistro(){
+    //console.log(this.form);
+    if (this.form.invalid === true){
+      console.log("Perroloco");
+      this.toastr.warning('Informacion invalida', 'Ingrese Informacion');
+      return;
+    }
+    /* Se crea un objeto para almacenar */
+    const Seguimiento: any = {
+      registroId: this.form.get('Registro')?.value,
+      seguimiento1:this.form.get('Comentario')?.value,
+      Fecha: this.transformarFecha(new Date()),
+
+    }
+    // console.log(Seguimiento);
+    this.api.GuardarSeguimiento(Seguimiento).subscribe(
+      registro => {
+        // console.log('Respuesta del servidor:', Seguimiento);
+        // Puedes realizar otras acciones después de recibir la respuesta
+        this.toastr.success('Registro  guardo correctamente', 'Registro se guardo');
+        this.id=registro['id'];
+        this.GuardarEstado()
+      //  console.log(this.GuardarEstado);
+      },
+      error => {
+        // console.error('Error al enviar la solicitud:', error);
+        // Puedes manejar el error aquí
+      }
+    )
+    this.api.getSeguimiento(this.RegId).subscribe((data) => {
+      this.datos = data
+        console.log('Respuesta del servidor2:', this.RegId);
+        // Puedes realizar otras acciones después de recibir la respuesta
+        // console.log(data);
+      },
+      error => {
+        // console.error('Error al enviar la solicitud:', error);
+        // Puedes manejar el error aquí
+      }
+    )
+    this.form.reset();
+  }
+  transformarFecha(fecha: Date): Date {
+    fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());
+    return fecha;
+  }
+  GuardarEstado(){
+
+
+
+
+      const EstadoI: any = {
+        RegistroId: 1,
+        EstadoId: 1,
+        
+      }
+      console.log(EstadoI)
+
+   this.api.GuardarEstado(1,1).subscribe() 
+ 
+    }
+
+  
+// console.log(this.datosR)
+   
+   onSelectionChange(): void {
+    //captura el valor del selector
+    this.valorSeleccionado;
+    console.log(this.valorSeleccionado)
+
+  }
+}

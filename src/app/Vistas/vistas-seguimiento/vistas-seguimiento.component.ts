@@ -19,7 +19,9 @@ export class VistasSeguimientoComponent {
   id: string | undefined;
 
   RegId: any;
-  valorSeleccionado!: string;
+
+  valorSeleccionado: string[] = [];
+  valoresSeleccionados: string[] = [];
 
   Formulario = new FormGroup({
     Asunto : new FormControl('',Validators.required)
@@ -97,7 +99,8 @@ export class VistasSeguimientoComponent {
         // Puedes manejar el error aquí
       }
     )
-    this.api.getSeguimiento(this.RegId).subscribe((data) => {
+
+    this.api.getSeguimiento(this.RegId.valorSeleccionado).subscribe((data) => {
       this.datos = data
       // console.log(data);
         // console.log('Respuesta del servidor2:', this.RegId);
@@ -115,30 +118,39 @@ export class VistasSeguimientoComponent {
     fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());
     return fecha;
   }
-  GuardarEstado(){
-    const EstadoI: any = {
-      EstadoId: this.valorSeleccionado,
-    }
-    // console.log("entro")
-    // console.log(EstadoI.estadoId);
-    //this.Estados= I.target.value;
-    
-    this.api.GuardarEstado( this.RegId,EstadoI).subscribe(data => {
-      console.log(this.RegId,EstadoI)
-      this.form = data
-      },
-      error => {
-        //console.error('Error al enviar la solicitud:', error);
-        //Puedes manejar el error aquí
-      }
-    )
-// console.log(this.datosR)
-   }
-   onSelectionChange(): void {
-    //captura el valor del selector
-    this.valorSeleccionado;
-    console.log(this.valorSeleccionado)
-   }
+
+  GuardarEstado() {
+    // Obtener el ID de la tabla y crear el objeto con los nuevos datos
+    // Puedes obtener esto de alguna manera (por ejemplo, si tienes un objeto con el ID asociado al valor seleccionado)
+    const newData = { campo: this.valorSeleccionado };
+    // Ajusta los campos según tu API
+    console.log(newData)
+    // Actualizar la tabla 1
+    this.api.GuardarEstado(this.RegId, newData).subscribe()
+    console.log(this.RegId)
+    console.log(newData)
+  }
+  
+//    GuardarEstado(RegId)
+//      this.valorSeleccionado
+//      const EstadoI: any = {
+//        EstadoId: this.valorSeleccionado,
+//      }
+//      console.log(this.Estados)
+//      this.api.GuardarEstado( this.RegId,this.valorSeleccionado).subscribe(data => 
+//        this.form = dat
+//      },
+//      error => {
+//        //console.error('Error al enviar la solicitud:', error);
+//        //Puedes manejar el error aquí
+//      }
+//    )
+//      if (this.id === undefined) {    
+//      } else {    
+     
+//  // console.log(this.datosR)
+//     }
+
 
 
 }

@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-md-12 pad-adjust">
                             <label  for="exampleFormControlTextarea1" class="form-label">Estado</label>
-                            <select [(ngModel)]="valorSeleccionado" (change)="onSelectionChange()" formControlName="Estado" class="form-select" aria-label="Default select example">
+                            <select [(ngModel)]="valorSeleccionado" (change)="GuardarEstado()" formControlName="Estado" class="form-select" aria-label="Default select example">
                                 <option value="{{Michael.id}}" *ngFor="let Michael of Estados">{{Michael.estado1}}
                                 </option>
                             </select>

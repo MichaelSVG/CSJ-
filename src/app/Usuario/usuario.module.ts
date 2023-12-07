@@ -5,6 +5,9 @@ import { UsuarioListComponent } from './usuario-list/usuario-list.component';
 import { UsuarioDetailsComponent } from './usuario-details/usuario-details.component';
 import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
 import { UsuarioRoutingModule } from './usuario-routing.module';
+import {MatTableModule} from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -13,11 +16,19 @@ import { UsuarioRoutingModule } from './usuario-routing.module';
     UsuarioCreateComponent,
     UsuarioListComponent,
     UsuarioDetailsComponent,
-    UsuarioEditComponent
+    UsuarioEditComponent,
+    
   ],
   imports: [
     CommonModule,
-    UsuarioRoutingModule
+    UsuarioRoutingModule,
+    MatTableModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+    
+    
+    
   ]
 })
 export class UsuarioModule { }

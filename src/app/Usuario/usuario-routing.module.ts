@@ -4,6 +4,8 @@ import { UsuarioListComponent } from './usuario-list/usuario-list.component';
 import { UsuarioCreateComponent } from './usuario-create/usuario-create.component';
 import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
 import { UsuarioDetailsComponent } from './usuario-details/usuario-details.component';
+import {MatTableModule} from '@angular/material/table';
+import {FormsModule, FormGroup} from '@angular/forms';
 
 
 const Routes: Routes =[
@@ -14,7 +16,7 @@ const Routes: Routes =[
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(Routes)],
+  imports: [RouterModule.forChild(Routes), MatTableModule,FormsModule],
   exports:[RouterModule]
 
 })

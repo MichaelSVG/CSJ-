@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators, FormsModule, FormBuilder } from '@a
 import {ApiService} from '../../servicios/api/api.service'
 import { ToastrService } from 'ngx-toastr';
 import { MatSelectChange } from '@angular/material/select';
-
+//import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-vistas-registro',
@@ -59,11 +59,11 @@ export class VistasRegistroComponent implements OnInit{
         /* Alerta de boton guardar para no enviar datos nulos  */
         //console.log(this.form);
         // console.log(this.ResponsablesDetalle.length)
-        if (this.ResponsablesDetalle.length === 0 ) {
-        // console.log("Perroloco");
-        this.toastr.warning('Informacion invalida', 'Ingrese Informacion');
-        return;
-        }
+if (this.ResponsablesDetalle.length === 0 ) {
+ // console.log("Perroloco");
+ this.toastr.warning('Informacion invalida', 'Ingrese Informacion');
+ return;
+}
 
         if (this.form.invalid === true){
           // console.log("Perroloco");

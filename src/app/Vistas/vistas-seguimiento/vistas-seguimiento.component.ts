@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormsModule, FormBuilder } from '@angular/forms';
 import {ApiService} from '../../servicios/api/api.service'
 import { ToastrService } from 'ngx-toastr';
-import { MatSelectChange } from '@angular/material/select';
+
 
 @Component({
   selector: 'app-vistas-seguimiento',
@@ -12,7 +12,6 @@ import { MatSelectChange } from '@angular/material/select';
 })
 export class VistasSeguimientoComponent {
 
-
   datosR: any[]=[]; datos: any[]=[]; Estados: any[]=[];
 
   form: FormGroup;
@@ -20,9 +19,6 @@ export class VistasSeguimientoComponent {
   id: string | undefined;
 
   RegId: any;
-
-  valorSeleccionado!: string;
-
 
 
   Formulario = new FormGroup({
@@ -36,8 +32,7 @@ export class VistasSeguimientoComponent {
       Registro:['',Validators.required],
       Comentario:['',Validators.required],
       Estado:['',Validators.required],
-      
-      
+      EstadoId:[''],
     })
   }
   /*ngOnInit almacena los get de los datos para mostrar*/
@@ -63,7 +58,8 @@ export class VistasSeguimientoComponent {
       this.datos = data
       // console.log(data);
       //   console.log('Respuesta del servidor:', this.RegId);
-      // Puedes realizar otras acciones después de recibir la respuesta
+        // Puedes realizar otras acciones después de recibir la respuesta
+      
       },
       error => {
         // console.error('Error al enviar la solicitud:', error);
@@ -79,6 +75,7 @@ export class VistasSeguimientoComponent {
       this.toastr.warning('Informacion invalida', 'Ingrese Informacion');
       return;
     }
+
     /* Se crea un objeto para almacenar */
     const Seguimiento: any = {
       registroId: this.form.get('Registro')?.value,
@@ -103,9 +100,10 @@ export class VistasSeguimientoComponent {
     )
     this.api.getSeguimiento(this.RegId).subscribe((data) => {
       this.datos = data
+      // console.log(data);
         console.log('Respuesta del servidor2:', this.RegId);
         // Puedes realizar otras acciones después de recibir la respuesta
-        // console.log(data);
+      
       },
       error => {
         // console.error('Error al enviar la solicitud:', error);
@@ -118,51 +116,29 @@ export class VistasSeguimientoComponent {
     fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());
     return fecha;
   }
-  // GuardarEstado(){
-
-
-
-
-  //     const EstadoI: any = {
-  //       RegistroId: 1,
-  //       EstadoId: 1,
-        
-  //     }
-  //     console.log(EstadoI)
-
-  //  this.api.GuardarEstado(this.RegId,EstadoI).subscribe() 
- 
-  //   }
   GuardarEstado(){
-      const EstadoI: any = {
-        EstadoId:9,
+    const EstadoI: any = {
+      EstadoId:9,
+    }
+    // console.log("entro")
+    // console.log(EstadoI.estadoId);
+    //this.Estados= I.target.value;
+    console.log(EstadoI.EstadoId)
+    this.api.GuardarEstado( this.RegId,9).subscribe(data => {
+      console.log(this.RegId,EstadoI.estadoId)
+      this.form = data
+      // console.log(this.datosR)
+      // console.log('Respuesta del servidor:', this.datosR);
+        //Puedes realizar otras acciones después de recibir la respuesta
+      
+      },
+      error => {
+        //console.error('Error al enviar la solicitud:', error);
+        //Puedes manejar el error aquí
       }
-      // console.log("entro")
-      // console.log(EstadoI.estadoId);
-      //this.Estados= I.target.value;
-      console.log(EstadoI.EstadoId)
-      this.api.GuardarEstado( this.RegId,9).subscribe(data => {
-        console.log(this.RegId,EstadoI.estadoId)
-        this.form = data
-        // console.log(this.datosR)
-        // console.log('Respuesta del servidor:', this.datosR);
-          //Puedes realizar otras acciones después de recibir la respuesta
-        
-        },
-        error => {
-          //console.error('Error al enviar la solicitud:', error);
-          //Puedes manejar el error aquí
-        }
-      )
-  // console.log(this.datosR)
-     }
-  
+    )
 // console.log(this.datosR)
-   
-   onSelectionChange(): void {
-    //captura el valor del selector
-    this.valorSeleccionado;
-    console.log(this.valorSeleccionado)
+   }
 
-  }
+
 }

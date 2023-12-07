@@ -90,7 +90,7 @@ export class ApiService {
       // console.log(this.getSeguimiento)
     }
     GuardarEstado(RegistroId: any, EstadoId: any): Observable<any> {
-      return this.http.put(this.url, "api/Registro/" + RegistroId + '?EstadoId=', EstadoId);
+      return this.http.put(this.url+ "api/Registro/" + RegistroId + '?'+'EstadoId=', EstadoId);
     }
     // getData(): Observable<any[]> {
     //   return this.http.get<any[]>(this.url);

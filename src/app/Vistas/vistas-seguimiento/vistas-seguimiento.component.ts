@@ -20,6 +20,8 @@ export class VistasSeguimientoComponent {
 
   RegId: any;
 
+  Estado1: any;
+
   valorSeleccionado: string[] = [];
   valoresSeleccionados: string[] = [];
 
@@ -87,11 +89,22 @@ export class VistasSeguimientoComponent {
     // console.log(Seguimiento);
     this.api.GuardarSeguimiento(Seguimiento).subscribe(
       registro => {
+        
+        this.api.GuardarEstado(this.RegId, this.Estado1).subscribe(
+          () => {
+            console.log('Datos actualizados correctamente');
+            // Puedes realizar acciones adicionales después de la actualización
+          },
+          error => {
+            console.error('Error al actualizar datos', error);
+          }
+        );
         // console.log('Respuesta del servidor:', Seguimiento);
         // Puedes realizar otras acciones después de recibir la respuesta
         this.toastr.success('Registro  guardo correctamente', 'Registro se guardo');
-        this.id=registro['id'];
-        this.GuardarEstado()
+
+
+
       //  console.log(this.GuardarEstado);
       },
       error => {
@@ -99,19 +112,19 @@ export class VistasSeguimientoComponent {
         // Puedes manejar el error aquí
       }
     )
+    // this.api.getSeguimiento(this.RegId.valorSeleccionado).subscribe((data) => {
 
-    this.api.getSeguimiento(this.RegId.valorSeleccionado).subscribe((data) => {
-      this.datos = data
-      // console.log(data);
-        // console.log('Respuesta del servidor2:', this.RegId);
-        // Puedes realizar otras acciones después de recibir la respuesta
+    //   this.datos = data
+    //   // console.log(data);
+    //     // console.log('Respuesta del servidor2:', this.RegId);
+    //     // Puedes realizar otras acciones después de recibir la respuesta
       
-      },
-      error => {
-        // console.error('Error al enviar la solicitud:', error);
-        // Puedes manejar el error aquí
-      }
-    )
+    //   },
+    //   error => {
+    //     // console.error('Error al enviar la solicitud:', error);
+    //     // Puedes manejar el error aquí
+    //   }
+    // )
     this.form.reset();
   }
   transformarFecha(fecha: Date): Date {
@@ -120,15 +133,10 @@ export class VistasSeguimientoComponent {
   }
 
   GuardarEstado() {
-    // Obtener el ID de la tabla y crear el objeto con los nuevos datos
-    // Puedes obtener esto de alguna manera (por ejemplo, si tienes un objeto con el ID asociado al valor seleccionado)
-    const newData = { campo: this.valorSeleccionado };
-    // Ajusta los campos según tu API
-    console.log(newData)
-    // Actualizar la tabla 1
-    this.api.GuardarEstado(this.RegId, newData).subscribe()
-    console.log(this.RegId)
-    console.log(newData)
+
+    this.Estado1 = this.valorSeleccionado
+    console.log(this.Estado1)
+   
   }
   
 //    GuardarEstado(RegId)

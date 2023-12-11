@@ -26,7 +26,8 @@ export class ApiService {
 
 
   url:string = "https://192.168.209.253:446/"
-  // url:string = "https://localhost:7202/"
+// https://localhost:7202/
+// https://192.168.209.253:446/
   private httpHeaders =new HttpHeaders ({'content-Type': 'appplication/json'});
   
   
@@ -89,9 +90,14 @@ export class ApiService {
       return this.http.get<SeguimientoM[]>(direccion)
       // console.log(this.getSeguimiento)
     }
+    // GuardarEstado(RegistroId: any, EstadoId: any): Observable<any> {
+    //   return this.http.put(this.url+ "api/Registro/" + RegistroId + '?EstadoId=', EstadoId);
+    // }
+
     GuardarEstado(RegistroId: any, EstadoId: any): Observable<any> {
-      return this.http.put(this.url+ "api/Registro/" + RegistroId + '?'+'EstadoId=', EstadoId);
-    }
+    const URL= `${this.url+"api/Registro"}/${RegistroId}`+'?EstadoId=' + EstadoId;
+    return this.http.put(URL, EstadoId);
+  }
     // getData(): Observable<any[]> {
     //   return this.http.get<any[]>(this.url);
     // }

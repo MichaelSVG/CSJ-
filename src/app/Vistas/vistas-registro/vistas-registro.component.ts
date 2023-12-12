@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatSelectChange } from '@angular/material/select';
 //import { ConsoleReporter } from 'jasmine';
 
+
 @Component({
   selector: 'app-vistas-registro',
   templateUrl: './vistas-registro.component.html',
@@ -18,7 +19,7 @@ export class VistasRegistroComponent implements OnInit{
     }
  //--------------------------------------------------------------------------------------------------------------//
 
-    datos: any[]=[]; datosR: any[]=[]; datosM: any[]=[]; datosE: any[]=[]; registroD:any[]=[];  
+    datos: any[]=[]; datosR: any[]=[]; datosM: any[]=[]; datosE: any[]=[]; registroD:any[]=[];  datosc: any[]=[];
     form: FormGroup;
     id: string | undefined;
     ResponsablesDetalle: string[]=[];
@@ -29,6 +30,7 @@ export class VistasRegistroComponent implements OnInit{
         this.form =this.fb.group({
           Remitente:['',Validators.required],
           Asunto:['',Validators.required],
+          ciudadId:['',Validators.required],
           Medio:['', Validators.required],
           Registro:['', Validators.required],
           Fecha:['',Validators.required],
@@ -53,7 +55,10 @@ export class VistasRegistroComponent implements OnInit{
        this.api.getMedio("Estados").subscribe((data) => {
         this.datosE = data;
        })
-    
+       
+       this.api.getCiudad("ciudades").subscribe((data) => {
+        this.datosc = data;
+       })
       }
       GuardarRegistro(){
         /* Alerta de boton guardar para no enviar datos nulos  */
@@ -72,7 +77,7 @@ if (this.ResponsablesDetalle.length === 0 ) {
         }
         const registro: any = {
           RemitenteId: this.form.get('Remitente')?.value,
-          Ciudad: this.form.get('Ciudad')?.value,
+          ciudadId: this.form.get('ciudadId')?.value,
           AsuntoId: this.form.get('Asunto')?.value,
           MedioId: this.form.get('Medio')?.value,
           Nota: this.form.get('Registro')?.value,
@@ -119,21 +124,18 @@ if (this.ResponsablesDetalle.length === 0 ) {
           
 
       }
- //--------------------
-RecorrerCheck(event: MatSelectChange){
-
-
-  //Guarda el valor seleccionado en la variable de select
-  this.ResponsablesDetalle = event.value; // Actualiza la variable con el nuevo valor seleccionado
-  console.log('Valor seleccionado:', this.ResponsablesDetalle);
-  }
- 
- 
- //------------------------------------------------------------------------------------------//
+ //-------------------------------------------------------------------------------------------------------------------//
+      RecorrerCheck(event: MatSelectChange){
+      //Guarda el valor seleccionado en la variable de select
+      this.ResponsablesDetalle = event.value; // Actualiza la variable con el nuevo valor seleccionado
+      console.log('Valor seleccionado:', this.ResponsablesDetalle);
+    }
+ //-------------------------------------------------------------------------------------------------------------//
       transformarFecha(fecha: Date): Date {
         fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());
         return fecha;
       }
  //--------------------------------------------------------------------------------------------------------------//
+
 
 }

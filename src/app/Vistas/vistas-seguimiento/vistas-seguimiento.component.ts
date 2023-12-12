@@ -5,6 +5,7 @@ import {ApiService} from '../../servicios/api/api.service'
 import { ToastrService } from 'ngx-toastr';
 import { MatSelectChange } from '@angular/material/select';
 
+
 @Component({
   selector: 'app-vistas-seguimiento',
   templateUrl: './vistas-seguimiento.component.html',
@@ -29,7 +30,7 @@ export class VistasSeguimientoComponent {
     Asunto : new FormControl('',Validators.required)
   })
 
-  constructor(private api:ApiService, private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private api:ApiService, private fb: FormBuilder, private toastr: ToastrService,) {
     this.form =this.fb.group({
       
       

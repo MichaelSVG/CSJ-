@@ -25,16 +25,17 @@
                                     {{Michael.responsable1}}</option>
                             </select>
                         </div>
-                        <br />
+                        <br>
                         <div class="col-md-12 pad-adjust">
-                            <label for="exampleFormControlTextarea1" class="form-label">Cuidad</label>
-                            <select formControlName="Ciudad" class="form-select" aria-label="Default select example"
+                            <label for="exampleFormControlTextarea1" class="form-label">Ciudades</label>
+                            <select formControlName="ciudadId" class="form-select" aria-label="Default select example"
                                 required>
-                                <option value="{{Michael.id}}" *ngFor="let Michael of datosR" required>
-                                    {{Michael.responsable1}}</option>
+                                <option value="{{Michael.ciudadId}}" *ngFor="let Michael of datosc" required>{{Michael.ciudadId+' '+Michael.ciudad1+' '+Michael.departamento}}</option>
                             </select>
                         </div>
+                        <br>
                     </div>
+                    <br>
                     <div class="row ">
                         <div class="col-md-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Asunto</label>
@@ -77,7 +78,7 @@
 
                             <mat-form-field>
                                 <mat-label class="form-label">Responsables</mat-label><br/>
-                                <mat-select (selectionChange)="RecorrerCheck($event)" formControlName="responsables" class="form-select" multiple aria-label="Multiple select example" required>
+                                <mat-select (selectionChange)="RecorrerCheck($event)" formControlName="responsableId" class="form-select" multiple aria-label="Multiple select example" required>
                                     <mat-option  value="{{Michael.id}}" *ngFor="let Michael of datosR" required>{{Michael.responsable1}}</mat-option>
                                 </mat-select>
                             </mat-form-field>

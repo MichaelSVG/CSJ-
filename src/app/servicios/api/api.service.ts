@@ -54,6 +54,10 @@ export class ApiService {
       return this.http.get<Mediointerface[]>(direccion)
       
     }
+    getCiudad(page:string):Observable<Mediointerface[]>{
+      let direccion = this.url + "api/" + page;
+      return this.http.get<Mediointerface[]>(direccion) 
+    }
 
     getEstados(page:string):Observable<EstadosInterface[]>{
       let direccion = this.url + "api/" + page;
@@ -72,8 +76,6 @@ export class ApiService {
     GuardarRegistroDetalle(registrodetalle: any): Observable<any> {
       return this.http.post(`${this.url}api/RegistroDetalle`, registrodetalle);
     }
-
-  
     getregistroA(page:string):Observable<registroA[]>{
       let direccion = this.url + "api/" + page;
       return this.http.get<registroA[]>(direccion)
@@ -82,29 +84,13 @@ export class ApiService {
     GuardarSeguimiento(registro: any): Observable<any> {
       return this.http.post(`${this.url}api/seguimiento`, registro);
     }
-
     getSeguimiento(page:number):Observable<SeguimientoM[]>{
-      
       let direccion = this.url + "api/seguimiento/" +  page;
-      // console.log(direccion)
       return this.http.get<SeguimientoM[]>(direccion)
-      // console.log(this.getSeguimiento)
     }
-    // GuardarEstado(RegistroId: any, EstadoId: any): Observable<any> {
-    //   return this.http.put(this.url+ "api/Registro/" + RegistroId + '?EstadoId=', EstadoId);
-    // }
-
     GuardarEstado(RegistroId: any, EstadoId: any): Observable<any> {
     const URL= `${this.url+"api/Registro"}/${RegistroId}`+'?EstadoId=' + EstadoId;
     return this.http.put(URL, EstadoId);
   }
-    // getData(): Observable<any[]> {
-    //   return this.http.get<any[]>(this.url);
-    // }
-    // SaveRegistro(registro: any){
-
-    //   return this.http.post(this.url + "registro", registro)
-
-    // }
-    
+  
 }
